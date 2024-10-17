@@ -1,4 +1,4 @@
-Projeto base -> [__Clique aqui__]([https://github.com/cassianobrexbit/dio-live-serverless-2907])
+Projeto base -> [__Clique aqui__](https://github.com/cassianobrexbit/dio-live-serverless-2907)
 
 ## Projeto proposto pela DIO para aprendizado.
 
