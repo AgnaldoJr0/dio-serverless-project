@@ -1,0 +1,81 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: agnaldo
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: dio-serverless-project
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  lambdaHashingVersion: 20201221
+  region: sa-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+          Resource: 
+            - arn:aws:dynamodb:sa-east-1:762233765383:table/NewItemTable
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+          Resource:
+            - arn:aws:s3:::serverless-framework-deployments-sa-east-1-46c654a6-00c7/*
+  environment:
+    BUCKET: serverless-s3-project
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+  insertItem:
+    handler: src/insertItem.handler
+    events:
+      - http:
+          path: /item
+          method: post   
+  fetchItems:
+    handler: src/fetchItems.handler
+    events:
+      - http:
+          path: /items
+          method: get 
+  fetchItem:
+    handler: src/fetchItem.handler
+    events:
+      - http:
+          path: /items/{id}
+          method: get
+  updateItem:
+    handler: src/updateItem.handler
+    events:
+      - http:
+          path: /items/{id}
+          method: put     
+  uploadFile:
+    handler: src/uploadFile.handler
+    events:
+      - http:
+          path: /{item}
+          method: post              
+
+resources:
+  Resources:
+    NewItemTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: NewItemTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
