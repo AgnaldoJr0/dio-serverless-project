@@ -1,4 +1,4 @@
-Projeto base -> [__Clique aqui__]([https://github.com/rpeleias-v1/personapi_digital_innovation_one/tree/master](https://github.com/cassianobrexbit/dio-live-serverless-2907))
+Projeto base -> [__Clique aqui__]([https://github.com/cassianobrexbit/dio-live-serverless-2907])
 
 ## Projeto proposto pela DIO para aprendizado.
 
