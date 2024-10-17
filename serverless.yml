@@ -24,7 +24,7 @@ provider:
             - s3:PutObject
             - s3:GetObject
           Resource:
-            - arn:aws:s3:::serverless-framework-deployments-sa-east-1-46c654a6-00c7/*
+            - arn:aws:s3:::serverless-s3-project/*
   environment:
     BUCKET: serverless-s3-project
 
@@ -64,7 +64,12 @@ functions:
     events:
       - http:
           path: /{item}
-          method: post              
+          method: put
+          contentHandling: CONVERT_TO_BINARY
+          request:
+            parameters:
+              paths:
+                item: true
 
 resources:
   Resources:
